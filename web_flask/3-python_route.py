@@ -9,6 +9,9 @@ Pyhton script that starts a Flask web application:
     /hbnb: display “HBNB”
     /c/<text>: display “C ” followed by the value of the text variable
                (replace underscore _ symbols with a space)
+    /python/<text>: display “Python ”, followed by the value of the text
+                    variable (replace underscore _ symbols with a space )
+                    - The default value of text is “is cool”
 - uses the option strict_slashes=False definition
 """
 
@@ -31,6 +34,13 @@ def hbnb():
 def c(text):
     text = text.replace("_", " ")
     return f"C {text}"
+
+
+@app.route('/python', defaults={"text": "is cool"}, strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def python(text):
+    text = text.replace("_", " ")
+    return f"Python {text}"
 
 
 if __name__ == "__main__":
